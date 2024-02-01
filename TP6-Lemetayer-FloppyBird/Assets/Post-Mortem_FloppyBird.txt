@@ -1,0 +1,51 @@
+POST MORTEM FLOPPY BIRD
+
+Globalement, la majorité du Diagramme UML a été respecté, les classes ont les attributs et méthodes attendues.
+Plusieurs changement ont cependant été réalisés, changements qua nous allons aborder maintenant.
+
+Score : 
+ - La classe a été supprimée par manque d'intéret de son existance en tant que classe à part entière
+
+Game Launcher : 
+ - Une méthode StopGame a été ajoutée
+
+UI Manager : 
+ - 2 attrbuts de TextMeshPro ont été ajouté pour pouvoir afficher le score InGame et à la fin du jeu
+ - Init() a été changée en ResetGame pour rester en groupe avec les autres méthodes Reset
+ - OnPlayerDeath a été remplacée par EndDisplay qui sera appelé par le GameLauncher et non par le player directement
+ - UpdateScore a été adaptée pour fonctionner sur le player et non sur la classe Score
+
+BirdBehaviour : 
+ - Les 2 attributs de BirdSprite et BirdSound ont été retirés, et ont laissés place à jumpStrength et initPos (permet de reset)
+ - Init a de nouveau été remplacé par ResetPlayer
+ - Ajout des méthodes publiques StartMoving et StopMoving qui influent sur les contraintes du RigidBody dy player
+
+BirdSprite : 
+ - Ajout d'un attribut BirdBehaviour pour pouvoir profiter du système d'evenement de BirdBehaviour
+
+BirdSound : 
+ - Ajout d'un attribut AudioClip supplémentaire pour le passage d'un tuyau
+ - Ajout d'un attribut BirdBehaviour pour pouvoir profiter du système d'evenement de BirdBehaviour
+ - Ajout de la méthode correspondante
+
+PipeGenerator : 
+ - Modification de l'attribut Spacing à SpawnTimer pour plus de clareté
+ - Ajout d'attributs d'incréments pour chaque attribut statistique
+ - Supression de pipeSpeedCurr par manque d'intérêt
+
+ - Renomage de Init et StartGeneration par ResetPipes et StartSpawn
+ - Ajout de StopPipes permettant d'arrêter tous les pipes de l'écran
+ - Ajout de la méthode IncreaseDifficulty qui incrémente les attributs
+ - Ajout d'une méthode permettant d'ajouter un pipe au pipePool en cas de aucun pipe disponible
+
+Pipe : 
+ - Ajout d'un attribut unuseTime qui définit le temps d'utilisation du Pipe
+
+ - Retrait de la méthode Init
+ - Renommage de la méthode Place en InitPipe
+ - Ajout de la méthode ManualUnuse et de la coroutine AutoUnuse
+
+
+Sur ce TP, j'ai beaucoup experimenté avec les Unity Event Invoqués par le BirdBehaviour, notament de dynamiquement écouter ou ne plus écouter certains evenements. Je suis plutôt content du résultat
+
+
